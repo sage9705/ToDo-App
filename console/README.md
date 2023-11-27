@@ -59,8 +59,8 @@ This is version 3.0 of the To-Do List application. Significant changes and impro
 3. Navigate to the directory where `todo_app.py` is located.
 4. Run the Python file using the following command:
 
-  ```bash
-  python todo_app.py
+```bash
+python todo_app.py
 
 
 
