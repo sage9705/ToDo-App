@@ -1,7 +1,6 @@
 #Terminal based to-do application
-#v1.0
+#v2.0
 #Auhor: Edem Godwin Kumahor
-
 tasks = []
 completed_tasks = []
 uncompleted_tasks = []
@@ -12,12 +11,14 @@ while True:
     print("++                           ++")
     print("++ 1. Add Task               ++")
     print("++ 2. Mark Task as Complete  ++")
-    print("++ 3. View Tasks             ++")
-    print("++ 4. Remove Completed Tasks ++")
-    print("++ 5. Exit                   ++")
+    print("++ 3. View All Tasks         ++")
+    print("++ 4. View Completed Tasks   ++")
+    print("++ 5. View Uncompleted Tasks ++")
+    print("++ 6. Remove Completed Tasks ++")
+    print("++ 7. Exit                   ++")
     print("+++++++++++++++++++++++++++++++")
 
-    choice = input("\nEnter option (1-5): \n")
+    choice = input("\nEnter option (1-7): ")
 
     if choice == "1":
         task = input("Enter the task: ")
@@ -39,24 +40,38 @@ while True:
                 tasks[task_index]["complete"] = True
                 completed_tasks.append(tasks[task_index])
                 uncompleted_tasks.remove(tasks[task_index])
-                print("Task marked as complete!\n")
+                print("Task marked as complete!")
             else:
                 print("Invalid task index")
         except ValueError:
-            pass
-                    #print("Invalid input. Enter a valid number")
+            print("Invalid input. Enter a valid number")
 
     elif choice == "3":
         print("++======================================================++")
-        print("++                    Tasks List                        ++")
+        print("++                    All Tasks List                    ++")
         print("++                                                      ++")
         for i, task in enumerate(tasks):
             status = "Complete" if task["complete"] else "Incomplete"
             print(f"++  {i + 1}. {task['task']} - {status}")
-            print("++======================================================++")
-        print("\n")
+        print("++======================================================++\n\n")
 
     elif choice == "4":
+        print("++======================================================++")
+        print("++                   Completed Tasks                    ++")
+        print("++                                                      ++")
+        for i, task in enumerate(completed_tasks):
+            print(f"++  {i + 1}. {task['task']} - Complete")
+        print("++======================================================++\n\n")
+
+    elif choice == "5":
+        print("++======================================================++")
+        print("++                 Uncompleted Tasks                    ++")
+        print("++                                                      ++")
+        for i, task in enumerate(uncompleted_tasks):
+            print(f"++  {i + 1}. {task['task']} - Incomplete")
+        print("++======================================================++\n\n")
+
+    elif choice == "6":
         if not tasks:
             print("No tasks to remove")
             continue
@@ -73,8 +88,8 @@ while True:
         tasks = uncompleted_tasks.copy()
         print("Completed tasks removed successfully")
 
-    elif choice == "5":
+    elif choice == "7":
         print("Exiting...")
         break
     else:
-        print("Invalid choice. Please enter a number between 1 and 5.")
+        print("Invalid choice. Please enter a number between 1 and 7.")
