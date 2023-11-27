@@ -1,32 +1,28 @@
-# To-Do List Application (v2.0)
+# To-Do List Application (v2.2)
 
-This is version 2.0 of the To-Do List application. Several enhancements and new features have been introduced compared to the previous version (v1.0).
+This is version 2.2 of the To-Do List application. Several improvements and changes have been made compared to the previous version (v2.0).
 
-## Changes from v1.0
+## Changes from v2.0
 
-1. **Expanded Menu Options**
-   - The menu has been expanded to provide more functionality.
-   - New options include:
-     - Option 3: View All Tasks
-     - Option 4: View Completed Tasks
-     - Option 5: View Uncompleted Tasks
-     - Option 6: Remove Completed Tasks
+1. **Task Object Refactoring**
+   - When adding a new task (Option 1), the code has been refactored to create a `new_task` object before appending it to the `tasks` and `uncompleted_tasks` lists. This improves code readability and maintainability.
 
-2. **Improved Task Display**
-   - When viewing tasks, the display format has been improved.
-   - Option 3 displays all tasks with their completion status in a comprehensive format.
-   - Option 4 displays completed tasks with a clear indication of their status.
-   - Option 5 displays uncompleted tasks with a clear indication of their status.
+2. **Mark Task as Complete Enhancement**
+   - Option 2 has been enhanced to provide better user feedback.
+   - Checks have been added to ensure that a task is not marked as complete if it is already marked as complete.
+   - More informative error messages are displayed for invalid inputs.
 
-3. **Refined Task Removal Process**
-   - Option 6 has been added to remove completed tasks.
-   - The removal process has been refined for better clarity and functionality.
+3. **Refined Task Removal Process (Option 6)**
+   - The process of removing completed tasks (Option 6) has been refined for better efficiency.
+   - The `tasks` and `uncompleted_tasks` lists are now comprehensively updated based on completed tasks.
 
-4. **Additional User Feedback**
-   - Improved user feedback messages to provide more informative responses.
-   - Clearer messages for successful task additions and task completions.
+4. **Improved Task Display Format**
+   - The display format for all tasks (Option 3), completed tasks (Option 4), and uncompleted tasks (Option 5) has been improved for better readability.
 
-## Usage (unchanged from v1.0)
+5. **User Input Validation**
+   - Additional checks have been implemented to validate user input, providing clearer error messages for invalid input scenarios.
+
+## Usage (unchanged from v2.0)
 
 1. **Add Task**
    - Choose option 1 to add a new task.
@@ -57,7 +53,6 @@ This is version 2.0 of the To-Do List application. Several enhancements and new 
 7. **Exit**
    - Choose option 7 to exit the application.
 
-Enjoy the improved To-Do List application (v2.0) for efficient task management!
 
 ## License
 
