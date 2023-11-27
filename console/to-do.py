@@ -1,7 +1,8 @@
+# ==================================
 # ToDo List Application
-#v4.0
-#Author: Edem Godwin Kumahor
-
+# v4.0
+# Author: Edem Godwin Kumahor
+# ==================================
 
 def print_menu():
     print("+++++++++++++++++++++++++++++++")
