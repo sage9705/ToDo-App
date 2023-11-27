@@ -1,29 +1,28 @@
-# To-Do List Application (v2.2)
+# To-Do List Application (v3.0)
 
-This is version 2.2 of the To-Do List application. Several improvements and changes have been made compared to the previous version (v2.0).
+This is version 3.0 of the To-Do List application. Significant changes and improvements have been made to enhance code organization, modularity, and readability compared to the previous version (v2.2).
 
-## Changes from v2.0
+## Changes from v2.2
 
-1. **Task Object Refactoring**
-   - When adding a new task (Option 1), the code has been refactored to create a `new_task` object before appending it to the `tasks` and `uncompleted_tasks` lists. This improves code readability and maintainability.
+1. **Function Modularization**
+   - The code has been organized into functions to improve modularity and readability.
+   - Each major functionality (e.g., adding a task, marking a task as complete, viewing tasks) has its own dedicated function.
 
-2. **Mark Task as Complete Enhancement**
-   - Option 2 has been enhanced to provide better user feedback.
-   - Checks have been added to ensure that a task is not marked as complete if it is already marked as complete.
-   - More informative error messages are displayed for invalid inputs.
+2. **Code Structuring**
+   - The main part of the code has been encapsulated within a `main()` function.
+   - The functions for printing the menu, adding a task, marking a task as complete, and viewing tasks are defined outside the main loop for better structure.
 
-3. **Refined Task Removal Process (Option 6)**
-   - The process of removing completed tasks (Option 6) has been refined for better efficiency.
-   - The `tasks` and `uncompleted_tasks` lists are now comprehensively updated based on completed tasks.
+3. **Code Reusability**
+   - Functions like `add_task()`, `mark_task_complete()`, `view_all_tasks()`, `view_completed_tasks()`, and `view_uncompleted_tasks()` can be easily reused in other parts of the program or extended for future modifications.
 
-4. **Improved Task Display Format**
-   - The display format for all tasks (Option 3), completed tasks (Option 4), and uncompleted tasks (Option 5) has been improved for better readability.
+4. **Improved User Feedback**
+   - User feedback messages have been refined for clarity and consistency across different functions.
+   - Messages are displayed when there are no tasks to mark as complete, no completed tasks to display, or no completed tasks to remove.
 
-5. **User Input Validation**
-   - Additional checks have been implemented to validate user input, providing clearer error messages for invalid input scenarios.
+5. **Error Handling**
+   - Exception handling has been improved, providing more informative error messages for invalid inputs.
 
-## Usage (unchanged from v2.0)
-
+## Usage
 1. **Add Task**
    - Choose option 1 to add a new task.
    - Enter the task when prompted.
@@ -52,6 +51,24 @@ This is version 2.2 of the To-Do List application. Several improvements and chan
 
 7. **Exit**
    - Choose option 7 to exit the application.
+
+## How to Run
+
+1. Copy the code and paste it into a Python file, for example, `todo_app.py` or you can simply clone the repository.
+2. Open a terminal or command prompt.
+3. Navigate to the directory where `todo_app.py` is located.
+4. Run the Python file using the following command:
+
+  ```bash
+  python todo_app.py
+
+
+
+
+## Prerequisites
+
+Ensure that you have Python installed on your system before running the application. If not, you can download and install Python from [python.org](https://www.python.org/).
+
 
 
 ## License

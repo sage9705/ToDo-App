@@ -1,15 +1,10 @@
 #Terminal based to-do application
-#v2.0
+#v3.0
 #Auhor: Edem Godwin Kumahor
 
 # Initialize empty lists to store tasks, completed tasks, and uncompleted tasks
-tasks = []
-completed_tasks = []
-uncompleted_tasks = []
-
-# Infinite loop for the To-Do List application
-while True:
-    # Display the To-Do Menu
+# Function to print the To-Do Menu
+def print_menu():
     print("+++++++++++++++++++++++++++++++")
     print("++        To-Do Menu:        ++")
     print("++                           ++")
@@ -22,98 +17,118 @@ while True:
     print("++ 7. Exit                   ++")
     print("+++++++++++++++++++++++++++++++")
 
-    # Get user choice
-    choice = input("\nEnter option (1-7): ")
+# Function to add a task to the tasks and uncompleted_tasks lists
+def add_task(tasks, uncompleted_tasks):
+    task = input("Enter the task: ")
+    new_task = {"task": task, "complete": False}
+    tasks.append(new_task)
+    uncompleted_tasks.append(new_task)
+    print("Task added successfully!\n\n")
 
-    # Option 1: Add Task
-    if choice == "1":
-        task = input("Enter the task: ")
-        new_task = {"task": task, "complete": False}
-        tasks.append(new_task)
-        uncompleted_tasks.append(new_task)
-        print("Task added successfully!\n\n")
+# Function to mark a task as complete and update the uncompleted_tasks list
+def mark_task_complete(tasks, uncompleted_tasks):
+    if not tasks:
+        print("No tasks to mark as complete")
+        return
 
-    # Option 2: Mark Task as Complete
-    elif choice == "2":
-        # Check if there are tasks to mark as complete
-        if not tasks:
-            print("No tasks to mark as complete")
-            continue
+    try:
+        index_input = input("Enter the task index (number assigned to task) to mark as complete: ")
+        if index_input.isdigit():
+            task_index = int(index_input) - 1
 
-        try:
-            index_input = input("Enter the task index(number assigned to task) to mark as complete: ")
-            
-            # Check if the input is a valid number
-            if index_input.isdigit():
-                task_index = int(index_input) - 1
+            if 0 <= task_index < len(tasks):
+                task = tasks[task_index]
 
-                # Check if the task index is within the valid range
-                if 0 <= task_index < len(tasks):
-                    task = tasks[task_index]
-
-                    # Check if the task is not already marked as complete
-                    if not task["complete"]:
-                        task["complete"] = True
-                        completed_tasks.append(task)
-                        uncompleted_tasks.remove(task)
-                        print("Task marked as complete!")
-                    else:
-                        print("Task is already marked as complete")
+                if not task["complete"]:
+                    task["complete"] = True
+                    uncompleted_tasks.remove(task)
+                    print("Task marked as complete!")
                 else:
-                    print("Invalid task index")
+                    print("Task is already marked as complete")
             else:
-                raise ValueError("Invalid input. Enter a valid number")
-        except ValueError as e:
-            print(e)
+                print("Invalid task index")
+        else:
+            raise ValueError("Invalid input. Enter a valid number")
+    except ValueError as e:
+        print(e)
 
-    # Option 3: View All Tasks
-    elif choice == "3":
+# Function to display the list of all tasks with their statuses
+def view_all_tasks(tasks):
+    print("++======================================================++")
+    print("++                    All Tasks List                    ++")
+    print("++                                                      ++")
+    for i, task in enumerate(tasks):
+        status = "Complete" if task["complete"] else "Incomplete"
+        print(f"++  {i + 1}. {task['task']} - {status}")
         print("++======================================================++")
-        print("++                    All Tasks List                    ++")
-        print("++                                                      ++")
-        for i, task in enumerate(tasks):
-            status = "Complete" if task["complete"] else "Incomplete"
-            print(f"++  {i + 1}. {task['task']} - {status}")
-            print("++======================================================++")
-        print("\n\n")
+    print("\n\n")
 
-    # Option 4: View Completed Tasks
-    elif choice == "4":
+# Function to display the list of completed tasks
+def view_completed_tasks(tasks):
+    completed_tasks = [task for task in tasks if task["complete"]]
+    
+    if not completed_tasks:
+        print("No completed tasks to display")
+        return
+    
+    print("++======================================================++")
+    print("++                   Completed Tasks                    ++")
+    print("++                                                      ++")
+    for i, task in enumerate(completed_tasks):
+        print(f"++  {i + 1}. {task['task']} - Complete")
         print("++======================================================++")
-        print("++                   Completed Tasks                    ++")
-        print("++                                                      ++")
-        for i, task in enumerate(completed_tasks):
-            print(f"++  {i + 1}. {task['task']} - Complete")
-            print("++======================================================++")
-        print("\n\n")
+    print("\n\n")
 
-    # Option 5: View Uncompleted Tasks
-    elif choice == "5":
+# Function to display the list of uncompleted tasks
+def view_uncompleted_tasks(uncompleted_tasks):
+    print("++======================================================++")
+    print("++                 Uncompleted Tasks                    ++")
+    print("++                                                      ++")
+    for i, task in enumerate(uncompleted_tasks):
+        print(f"++  {i + 1}. {task['task']} - Incomplete")
         print("++======================================================++")
-        print("++                 Uncompleted Tasks                    ++")
-        print("++                                                      ++")
-        for i, task in enumerate(uncompleted_tasks):
-            print(f"++  {i + 1}. {task['task']} - Incomplete")
-            print("++======================================================++")
-        print("\n\n")
+    print("\n\n")
 
-    # Option 6: Remove Completed Tasks
-    elif choice == "6":
-        # Check if there are completed tasks to remove
-        if not completed_tasks:
-            print("No completed tasks to remove")
-            continue
+# Function to remove completed tasks from the tasks and uncompleted_tasks lists
+def remove_completed_tasks(tasks, uncompleted_tasks):
+    if not any(task["complete"] for task in tasks):
+        print("No completed tasks to remove")
+        return
 
-        # Update tasks and uncompleted_tasks lists by removing completed tasks
-        tasks = [task for task in tasks if not task["complete"]]
-        uncompleted_tasks = [task for task in tasks if not task["complete"]]
-        print("Completed tasks removed successfully")
+    completed_tasks = [task for task in tasks if task["complete"]]
+    for task in completed_tasks:
+        tasks.remove(task)
+    uncompleted_tasks[:] = [task for task in tasks if not task["complete"]]
+    print("Completed tasks removed successfully")
 
-    # Option 7: Exit
-    elif choice == "7":
-        print("Exiting...")
-        break
+# Main function to run the To-Do List application
+def main():
+    tasks = []              # List to store all tasks
+    uncompleted_tasks = []  # List to store uncompleted tasks
 
-    # Invalid choice: Provide user feedback
-    else:
-        print("Invalid choice. Please enter a number between 1 and 7.")
+    while True:
+        print_menu()
+        choice = input("\nEnter option (1-7): ")
+
+        if choice == "1":
+            add_task(tasks, uncompleted_tasks)
+        elif choice == "2":
+            mark_task_complete(tasks, uncompleted_tasks)
+        elif choice == "3":
+            view_all_tasks(tasks)
+        elif choice == "4":
+            view_completed_tasks(tasks)
+        elif choice == "5":
+            view_uncompleted_tasks(uncompleted_tasks)
+        elif choice == "6":
+            remove_completed_tasks(tasks, uncompleted_tasks)
+        elif choice == "7":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 7.")
+
+# Run the application if the script is executed directly
+if __name__ == "__main__":
+    main()
+
