@@ -1,28 +1,27 @@
-# To-Do List Application (v3.0)
+# To-Do List Application (v4.0)
 
-This is version 3.0 of the To-Do List application. Significant changes and improvements have been made to enhance code organization, modularity, and readability compared to the previous version (v2.2).
+This is version 4.0 of the To-Do List application, featuring additional functionality and improvements compared to the previous version (v3.0).
 
-## Changes from v2.2
+## Changes from v3.0
 
-1. **Function Modularization**
-   - The code has been organized into functions to improve modularity and readability.
-   - Each major functionality (e.g., adding a task, marking a task as complete, viewing tasks) has its own dedicated function.
+1. **Menu Expansion**
+   - The menu has been expanded to include an option for viewing history tasks.
+   - Option 7 now allows users to view tasks that have been marked as complete and subsequently moved to the history.
 
-2. **Code Structuring**
-   - The main part of the code has been encapsulated within a `main()` function.
-   - The functions for printing the menu, adding a task, marking a task as complete, and viewing tasks are defined outside the main loop for better structure.
+2. **History Tasks List**
+   - A new list, `history_tasks_list`, has been introduced to store completed tasks that have been moved from the main task list.
+   - The `view_history_tasks()` function displays the history tasks with an indication of their completion status.
 
-3. **Code Reusability**
-   - Functions like `add_task()`, `mark_task_complete()`, `view_all_tasks()`, `view_completed_tasks()`, and `view_uncompleted_tasks()` can be easily reused in other parts of the program or extended for future modifications.
+3. **Remove Completed Tasks Update**
+   - The `remove_completed_tasks()` function now moves completed tasks to the history tasks list instead of discarding them entirely.
+   - The main task list is updated to remove completed tasks.
 
-4. **Improved User Feedback**
-   - User feedback messages have been refined for clarity and consistency across different functions.
-   - Messages are displayed when there are no tasks to mark as complete, no completed tasks to display, or no completed tasks to remove.
-
-5. **Error Handling**
-   - Exception handling has been improved, providing more informative error messages for invalid inputs.
+4. **Code Structure**
+   - The structure of the `main()` function has been modified to accommodate the new menu option and associated functionality.
+   - The history tasks list is now a parameter in relevant functions.
 
 ## Usage
+
 1. **Add Task**
    - Choose option 1 to add a new task.
    - Enter the task when prompted.
@@ -46,22 +45,24 @@ This is version 3.0 of the To-Do List application. Significant changes and impro
    - The list will display uncompleted tasks with a clear indication of their status.
 
 6. **Remove Completed Tasks**
-   - Choose option 6 to remove completed tasks from the list.
-   - The completed tasks will be cleared from the list of completed tasks, and the list of uncompleted tasks will be updated.
+   - Choose option 6 to move completed tasks to the history tasks list.
+   - The completed tasks will be removed from the main task list but stored in the history tasks list.
 
-7. **Exit**
-   - Choose option 7 to exit the application.
+7. **View History Tasks**
+   - Choose option 7 to view the list of history tasks.
+   - The list will display tasks that have been marked as complete and moved from the main task list to history.
+
+8. **Exit**
+   - Choose option 8 to exit the application.
 
 ## How to Run
 
 1. Copy the code and paste it into a Python file, for example, `todo_app.py` or you can simply clone the repository.
 2. Open a terminal or command prompt.
 3. Navigate to the directory where `todo_app.py` is located.
-4. Run the Python file using the following command: 
-        
-        python todo_app.py
+4. Run the Python file using the following command:
 
-
+   python todo_app.py
 
 
 

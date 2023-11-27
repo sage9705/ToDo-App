@@ -1,9 +1,8 @@
-#Terminal based to-do application
-#v3.0
-#Auhor: Edem Godwin Kumahor
+# ToDo List Application
+#v4.0
+#Author: Edem Godwin Kumahor
 
-# Initialize empty lists to store tasks, completed tasks, and uncompleted tasks
-# Function to print the To-Do Menu
+
 def print_menu():
     print("+++++++++++++++++++++++++++++++")
     print("++        To-Do Menu:        ++")
@@ -14,10 +13,10 @@ def print_menu():
     print("++ 4. View Completed Tasks   ++")
     print("++ 5. View Uncompleted Tasks ++")
     print("++ 6. Remove Completed Tasks ++")
-    print("++ 7. Exit                   ++")
+    print("++ 7. View History Tasks     ++")
+    print("++ 8. Exit                   ++")
     print("+++++++++++++++++++++++++++++++")
 
-# Function to add a task to the tasks and uncompleted_tasks lists
 def add_task(tasks, uncompleted_tasks):
     task = input("Enter the task: ")
     new_task = {"task": task, "complete": False}
@@ -25,7 +24,6 @@ def add_task(tasks, uncompleted_tasks):
     uncompleted_tasks.append(new_task)
     print("Task added successfully!\n\n")
 
-# Function to mark a task as complete and update the uncompleted_tasks list
 def mark_task_complete(tasks, uncompleted_tasks):
     if not tasks:
         print("No tasks to mark as complete")
@@ -52,8 +50,7 @@ def mark_task_complete(tasks, uncompleted_tasks):
     except ValueError as e:
         print(e)
 
-# Function to display the list of all tasks with their statuses
-def view_all_tasks(tasks):
+def view_all_tasks(tasks):    
     print("++======================================================++")
     print("++                    All Tasks List                    ++")
     print("++                                                      ++")
@@ -63,14 +60,13 @@ def view_all_tasks(tasks):
         print("++======================================================++")
     print("\n\n")
 
-# Function to display the list of completed tasks
 def view_completed_tasks(tasks):
     completed_tasks = [task for task in tasks if task["complete"]]
-    
+
     if not completed_tasks:
         print("No completed tasks to display")
         return
-    
+
     print("++======================================================++")
     print("++                   Completed Tasks                    ++")
     print("++                                                      ++")
@@ -79,7 +75,6 @@ def view_completed_tasks(tasks):
         print("++======================================================++")
     print("\n\n")
 
-# Function to display the list of uncompleted tasks
 def view_uncompleted_tasks(uncompleted_tasks):
     print("++======================================================++")
     print("++                 Uncompleted Tasks                    ++")
@@ -89,26 +84,40 @@ def view_uncompleted_tasks(uncompleted_tasks):
         print("++======================================================++")
     print("\n\n")
 
-# Function to remove completed tasks from the tasks and uncompleted_tasks lists
-def remove_completed_tasks(tasks, uncompleted_tasks):
-    if not any(task["complete"] for task in tasks):
+def remove_completed_tasks(tasks, uncompleted_tasks, history_tasks_list):
+    completed_tasks = [task for task in tasks if task["complete"]]
+
+    if not completed_tasks:
         print("No completed tasks to remove")
         return
 
-    completed_tasks = [task for task in tasks if task["complete"]]
-    for task in completed_tasks:
-        tasks.remove(task)
+    history_tasks_list.extend(completed_tasks)
+    tasks[:] = [task for task in tasks if not task["complete"]]
     uncompleted_tasks[:] = [task for task in tasks if not task["complete"]]
     print("Completed tasks removed successfully")
 
-# Main function to run the To-Do List application
+
+def view_history_tasks(history_tasks_list):
+    if not history_tasks_list:
+        print("No history tasks to display")
+        return
+
+    print("++======================================================++")
+    print("++                History Tasks List                    ++")
+    print("++                                                      ++")
+    for i, task in enumerate(history_tasks_list):
+        print(f"++  {i + 1}. {task['task']} - Complete")
+        print("++======================================================++")
+    print("\n\n")
+
 def main():
-    tasks = []              # List to store all tasks
-    uncompleted_tasks = []  # List to store uncompleted tasks
+    tasks = []
+    uncompleted_tasks = []
+    history_tasks_list = []
 
     while True:
         print_menu()
-        choice = input("\nEnter option (1-7): ")
+        choice = input("\nEnter option (1-8): ")
 
         if choice == "1":
             add_task(tasks, uncompleted_tasks)
@@ -121,14 +130,14 @@ def main():
         elif choice == "5":
             view_uncompleted_tasks(uncompleted_tasks)
         elif choice == "6":
-            remove_completed_tasks(tasks, uncompleted_tasks)
+            remove_completed_tasks(tasks, uncompleted_tasks, history_tasks_list)
         elif choice == "7":
+            view_history_tasks(history_tasks_list)
+        elif choice == "8":
             print("Exiting...")
             break
         else:
-            print("Invalid choice. Please enter a number between 1 and 7.")
+            print("Invalid choice. Please enter a number between 1 and 8.")
 
-# Run the application if the script is executed directly
 if __name__ == "__main__":
     main()
-
